@@ -1,30 +1,4 @@
-from skimage.measure import compare_ssim as ssim
 import cv2
-
-def compare_two_images(img_a, img_b, threshold=0.95):
-    img_1 = cv2.imread(img_a)
-    img_2 = cv2.imread(img_b)
-
-    # Convert to gray
-    img_1 = cv2.cvtColor(img_1, cv2.COLOR_BGR2GRAY)
-    img_2 = cv2.cvtColor(img_2, cv2.COLOR_BGR2GRAY)
-
-    s = ssim(img_1, img_2)
-
-    # print("ssim: %.2f" % s)
-
-    if s >= float(threshold):
-        return True
-    else:
-        return False
-
-def images_should_be_identical(img_a, img_b, threshold=0.95):
-    if not compare_two_images(img_a, img_b, threshold):
-        raise AssertionError("These two images are not identical!")
-
-def images_should_be_different(img_a, img_b, threshold=0.95):
-    if compare_two_images(img_a, img_b, threshold):
-        raise AssertionError("These two images are identical!")
 
 def face_detect(image, scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30)):
     face_cascade = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml') 
@@ -52,7 +26,7 @@ def face_detect(image, scaleFactor = 1.1, minNeighbors = 5, minSize = (30, 30)):
 def there_should_be_face_in_image(image):
     face_rects = face_detect(image)
     
-    if face_rects is None:
+    if len(face_rects) == 0:
         raise AssertionError("No face in the image!")
 
 
