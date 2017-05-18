@@ -6,10 +6,6 @@ Suite Teardown    Run Keywords    Terminate Tee Supplicant    Close All Connecti
 Resource          resource-xtest.robot
 
 *** Test Cases ***
-Execute xtest regression test
-    [Documentation]    Execute "xtest -t regression"
-    Run Regression Test
-
 Execute xtest benchmark test
     [Documentation]    Execute "xtest -t benchmark"
     Run Benchmark Test
