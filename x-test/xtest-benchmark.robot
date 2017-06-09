@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation     This test executing OPTEE "xtestx" on a remote machine
 ...               and getting the test result.
-Suite Setup       Run Keywords    Open Connection And Log In    Run Tee Supplicant
-Suite Teardown    Run Keywords    Terminate Tee Supplicant    Close All Connections
+Suite Setup       Open Connection And Log In
+Suite Teardown    Close All Connections
 Resource          resource-xtest.robot
 
 *** Test Cases ***

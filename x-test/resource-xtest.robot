@@ -5,15 +5,16 @@ Library           SSHLibrary
 Library           String
 
 *** Variables ***
-${HOST}           192.168.29.110
+${TARGET}         192.168.29.140
 ${USERNAME}       root
 ${PASSWORD}       ${EMPTY}
+${TIMEOUT}        4m
 
 *** Keywords ***
 Open Connection And Log In
-    Open Connection    ${HOST}
+    Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
-    Set Client Configuration    timeout=40s    prompt=root@hikey:~#
+    Set Client Configuration    timeout=${TIMEOUT}    prompt=root@hikey:~#
 
 Run Tee Supplicant
     Start Command    /usr/bin/tee-supplicant
