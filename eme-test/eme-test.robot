@@ -1,15 +1,19 @@
 *** Settings ***
-Suite Setup       Open Browser To Test Page
-Suite Teardown    Close Browser
+Suite Setup       Open SSH Connection And Login
+Suite Teardown    Close Connection and Browser
 Resource          lhg-robot-config.robot
 
 *** Test Cases ***
+Start Chromedriver
+    Run Chromedriver
+
 Run EME test
-    Input Video URL    ${TEST VIDEO URL}
-    Select Key System    ${KEY SYSTEM}
-    Sleep    2s
+    Open Browser To Test Page
+    Input Video URL    ${TEST_VIDEO_URL}
+    Select Key System    ${KEY_SYSTEM}
+    Sleep    5s
     Scroll Page Down To Bottom
     Play Video
-    Sleep    10s
+    Sleep    30s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png

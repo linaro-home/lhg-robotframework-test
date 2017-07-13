@@ -3,17 +3,30 @@ Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language.
-Library           Selenium2Library    timeout=30
+Library           Selenium2Library    timeout=90s
+Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
 
 *** Variables ***
-${TARGET}         'http://192.168.29.110:9515'
+${TARGET}         192.168.29.144
+${USERNAME}       linaro
+${PASSWORD}       ${EMPTY}
+${TARGET_CD}      http://${TARGET}:9515
 ${TESTPAGE}       http://people.linaro.org/~naresh.kamboju/chrome/eme_player.html
-${TEST VIDEO URL}    http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm
-${KEY SYSTEM}     External Clearkey
+${TEST_VIDEO_URL}    http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm
+${KEY_SYSTEM}     External Clearkey
 
 *** Keywords ***
+Open SSH Connection And Login
+    Open Connection    ${TARGET}
+    Login    ${USERNAME}    ${PASSWORD}
+
+Run Chromedriver
+    ${written}=    write    su
+    ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &
+    Sleep    5s
+
 Prepare Browser
     ${capabilities}=    Create Dictionary
     ${extension_list}=    Create List
@@ -21,7 +34,7 @@ Prepare Browser
     Set To Dictionary    ${capabilities}    extensions    ${extension_list}
     Set To Dictionary    ${capabilities}    args    ${args_list}
     ${desired_capabilities}=    Create Dictionary    chromeOptions=${capabilities}
-    ${executor}=    Evaluate    str(${TARGET})
+    ${executor}=    Evaluate    str('${TARGET_CD}')
     Create WebDriver    Remote    desired_capabilities=${desired_capabilities}    command_executor=${executor}
     Maximize Browser Window
 
@@ -43,3 +56,7 @@ Scroll Page Down To Bottom
 
 Play Video
     Click Button    Play
+
+Close Connection and Browser
+    Close All Connections
+    Close Browser
