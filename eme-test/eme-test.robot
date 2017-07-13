@@ -14,6 +14,6 @@ Run EME test
     Sleep    5s
     Scroll Page Down To Bottom
     Play Video
-    Sleep    30s
+    Sleep    10s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png
