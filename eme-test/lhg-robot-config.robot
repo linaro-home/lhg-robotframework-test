@@ -3,19 +3,18 @@ Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language.
-Library           Selenium2Library    timeout=90s
+Library           Selenium2Library    timeout=90s    run_on_failure=Nothing
 Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
 
 *** Variables ***
-${TARGET}         192.168.29.144
+${TARGET}         192.168.29.107
 ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
-${TESTPAGE}       http://people.linaro.org/~naresh.kamboju/chrome/eme_player.html
-${TEST_VIDEO_URL}    http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm
-${KEY_SYSTEM}     External Clearkey
+${CK_TESTPAGE}    http://people.linaro.org/~naresh.kamboju/chrome/eme_player.html
+${CK_TEST_VIDEO_URL}    http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm
 
 *** Keywords ***
 Open SSH Connection And Login
@@ -40,7 +39,7 @@ Prepare Browser
 
 Open Browser To Test Page
     Prepare Browser
-    Go To    ${TESTPAGE}
+    Go To    ${CK_TESTPAGE}
     Wait Until Element Is Visible    id=keySystemList
 
 Input Video URL
@@ -58,5 +57,5 @@ Play Video
     Click Button    Play
 
 Close Connection and Browser
-    Close All Connections
     Close Browser
+    Close All Connections
