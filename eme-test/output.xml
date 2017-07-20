@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170720 16:48:56.816" generator="Robot 3.0 (Python 2.7.12+ on linux2)">
+<suite source="/home/arthur/workspace/linaro/lhg/git/lhg-robotframework-test/eme-test/eme-clearkey-test.robot" id="s1" name="Eme-Clearkey-Test">
+<kw type="setup" name="Open SSH Connection And Login" library="lhg-robot-config">
+<kw name="Open Connection" library="SSHLibrary">
+<doc>Opens a new SSH connection to the given `host` and `port`.</doc>
+<arguments>
+<arg>${TARGET}</arg>
+</arguments>
+<status status="PASS" endtime="20170720 16:48:57.161" starttime="20170720 16:48:57.161"></status>
+</kw>
+<kw name="Login" library="SSHLibrary">
+<doc>Logs into the SSH server with the given `username` and `password`.</doc>
+<arguments>
+<arg>${USERNAME}</arg>
+<arg>${PASSWORD}</arg>
+</arguments>
+<msg timestamp="20170720 16:48:57.162" level="INFO">Logging into '192.168.29.107:22' as 'linaro'.</msg>
+<msg timestamp="20170720 16:48:58.027" level="INFO">Read output: Last login: Thu Jul 20 08:40:03 2017
+hikey:~$</msg>
+<status status="PASS" endtime="20170720 16:48:58.028" starttime="20170720 16:48:57.161"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:48:58.028" starttime="20170720 16:48:57.161"></status>
+</kw>
+<test id="s1-t1" name="Start-Chromedriver">
+<kw name="Run Chromedriver" library="lhg-robot-config">
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given `text` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>su</arg>
+</arguments>
+<assign>
+<var>${written}</var>
+</assign>
+<msg timestamp="20170720 16:48:58.037" level="INFO">su</msg>
+<msg timestamp="20170720 16:48:58.037" level="INFO">${written} =  su
+</msg>
+<status status="PASS" endtime="20170720 16:48:58.037" starttime="20170720 16:48:58.031"></status>
+</kw>
+<kw name="Write" library="SSHLibrary">
+<doc>Writes the given `text` on the remote machine and appends a newline.</doc>
+<arguments>
+<arg>/usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &amp;</arg>
+</arguments>
+<assign>
+<var>${stdout}</var>
+</assign>
+<msg timestamp="20170720 16:48:58.044" level="INFO">/usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &amp;</msg>
+<msg timestamp="20170720 16:48:58.045" level="INFO">${stdout} = /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &amp;
+</msg>
+<status status="PASS" endtime="20170720 16:48:58.045" starttime="20170720 16:48:58.038"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5s</arg>
+</arguments>
+<msg timestamp="20170720 16:49:03.046" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20170720 16:49:03.047" starttime="20170720 16:48:58.045"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:03.047" starttime="20170720 16:48:58.030"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:03.048" critical="yes" starttime="20170720 16:48:58.029"></status>
+</test>
+<test id="s1-t2" name="Run-EME-ClearKey-test">
+<kw name="Open Browser To Test Page" library="lhg-robot-config">
+<kw name="Prepare Browser" library="lhg-robot-config">
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<assign>
+<var>${capabilities}</var>
+</assign>
+<msg timestamp="20170720 16:49:03.054" level="INFO">${capabilities} = {}</msg>
+<status status="PASS" endtime="20170720 16:49:03.054" starttime="20170720 16:49:03.053"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<assign>
+<var>${extension_list}</var>
+</assign>
+<msg timestamp="20170720 16:49:03.055" level="INFO">${extension_list} = []</msg>
+<status status="PASS" endtime="20170720 16:49:03.055" starttime="20170720 16:49:03.054"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>--no-sandbox</arg>
+<arg>--register-pepper-plugins=/usr/lib/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm</arg>
+<arg>--in-process-gpu</arg>
+<arg>--enable-logging=/home/root/chromium_browser.log</arg>
+</arguments>
+<assign>
+<var>${args_list}</var>
+</assign>
+<msg timestamp="20170720 16:49:03.056" level="INFO">${args_list} = [u'--no-sandbox', u'--register-pepper-plugins=/usr/lib/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm', u'--in-process-gpu', u'--enable-logging=/home/root/chromium_browser.log']</msg>
+<status status="PASS" endtime="20170720 16:49:03.057" starttime="20170720 16:49:03.056"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${capabilities}</arg>
+<arg>extensions</arg>
+<arg>${extension_list}</arg>
+</arguments>
+<status status="PASS" endtime="20170720 16:49:03.058" starttime="20170720 16:49:03.057"></status>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<arguments>
+<arg>${capabilities}</arg>
+<arg>args</arg>
+<arg>${args_list}</arg>
+</arguments>
+<status status="PASS" endtime="20170720 16:49:03.059" starttime="20170720 16:49:03.058"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on given items.</doc>
+<arguments>
+<arg>chromeOptions=${capabilities}</arg>
+</arguments>
+<assign>
+<var>${desired_capabilities}</var>
+</assign>
+<msg timestamp="20170720 16:49:03.060" level="INFO">${desired_capabilities} = {u'chromeOptions': {u'args': [u'--no-sandbox', u'--register-pepper-plugins=/usr/lib/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm', u'--in-process-gpu', u'--enable-logging=/home/root/chro...</msg>
+<status status="PASS" endtime="20170720 16:49:03.060" starttime="20170720 16:49:03.059"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>str('${TARGET_CD}')</arg>
+</arguments>
+<assign>
+<var>${executor}</var>
+</assign>
+<msg timestamp="20170720 16:49:03.063" level="INFO">${executor} = http://192.168.29.107:9515</msg>
+<status status="PASS" endtime="20170720 16:49:03.063" starttime="20170720 16:49:03.060"></status>
+</kw>
+<kw name="Create Webdriver" library="Selenium2Library">
+<doc>Creates an instance of a WebDriver.</doc>
+<arguments>
+<arg>Remote</arg>
+<arg>desired_capabilities=${desired_capabilities}</arg>
+<arg>command_executor=${executor}</arg>
+</arguments>
+<msg timestamp="20170720 16:49:03.064" level="INFO">Creating an instance of the Remote WebDriver</msg>
+<status status="PASS" endtime="20170720 16:49:09.852" starttime="20170720 16:49:03.063"></status>
+</kw>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20170720 16:49:10.415" starttime="20170720 16:49:09.853"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:10.416" starttime="20170720 16:49:03.052"></status>
+</kw>
+<kw name="Go To" library="Selenium2Library">
+<doc>Navigates the active browser instance to the provided URL.</doc>
+<arguments>
+<arg>${CK_TESTPAGE}</arg>
+</arguments>
+<msg timestamp="20170720 16:49:10.418" level="INFO">Opening url 'http://people.linaro.org/~naresh.kamboju/chrome/eme_player.html'</msg>
+<status status="PASS" endtime="20170720 16:49:13.400" starttime="20170720 16:49:10.417"></status>
+</kw>
+<kw name="Wait Until Element Is Visible" library="Selenium2Library">
+<doc>Waits until element specified with `locator` is visible.</doc>
+<arguments>
+<arg>id=keySystemList</arg>
+</arguments>
+<status status="PASS" endtime="20170720 16:49:13.851" starttime="20170720 16:49:13.400"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:13.851" starttime="20170720 16:49:03.051"></status>
+</kw>
+<kw name="Input Video URL" library="lhg-robot-config">
+<arguments>
+<arg>${CK_TEST_VIDEO_URL}</arg>
+</arguments>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=mediaFile</arg>
+<arg>${video_url}</arg>
+</arguments>
+<msg timestamp="20170720 16:49:13.855" level="INFO">Typing text 'http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm' into text field 'id=mediaFile'</msg>
+<status status="PASS" endtime="20170720 16:49:15.437" starttime="20170720 16:49:13.854"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:15.437" starttime="20170720 16:49:13.852"></status>
+</kw>
+<kw name="Select Key System" library="lhg-robot-config">
+<arguments>
+<arg>External Clearkey</arg>
+</arguments>
+<kw name="Select From List By Label" library="Selenium2Library">
+<doc>Selects `*labels` from list identified by `locator`</doc>
+<arguments>
+<arg>id=keySystemList</arg>
+<arg>${key_system}</arg>
+</arguments>
+<msg timestamp="20170720 16:49:15.442" level="INFO">Selecting label(s) 'External Clearkey' from list 'id=keySystemList'.</msg>
+<status status="PASS" endtime="20170720 16:49:16.100" starttime="20170720 16:49:15.441"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:16.101" starttime="20170720 16:49:15.438"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>5s</arg>
+</arguments>
+<msg timestamp="20170720 16:49:21.103" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" endtime="20170720 16:49:21.103" starttime="20170720 16:49:16.102"></status>
+</kw>
+<kw name="Scroll Page Down To Bottom" library="lhg-robot-config">
+<kw name="Execute Javascript" library="Selenium2Library">
+<doc>Executes the given JavaScript code.</doc>
+<arguments>
+<arg>window.scrollTo(0,document.body.scrollHeight);</arg>
+</arguments>
+<msg timestamp="20170720 16:49:21.105" level="INFO">Executing JavaScript:
+window.scrollTo(0,document.body.scrollHeight);</msg>
+<status status="PASS" endtime="20170720 16:49:21.182" starttime="20170720 16:49:21.104"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:21.183" starttime="20170720 16:49:21.104"></status>
+</kw>
+<kw name="Play Video" library="lhg-robot-config">
+<kw name="Click Button" library="Selenium2Library">
+<doc>Clicks a button identified by `locator`.</doc>
+<arguments>
+<arg>Play</arg>
+</arguments>
+<msg timestamp="20170720 16:49:21.186" level="INFO">Clicking button 'Play'.</msg>
+<status status="PASS" endtime="20170720 16:49:22.071" starttime="20170720 16:49:21.185"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:22.072" starttime="20170720 16:49:21.184"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>10s</arg>
+</arguments>
+<msg timestamp="20170720 16:49:32.073" level="INFO">Slept 10 seconds</msg>
+<status status="PASS" endtime="20170720 16:49:32.074" starttime="20170720 16:49:22.072"></status>
+</kw>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<arguments>
+<arg>filename=After.png</arg>
+</arguments>
+<msg timestamp="20170720 16:49:33.577" html="yes" level="INFO">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="After.png"&gt;&lt;img src="After.png" width="800px"&gt;&lt;/a&gt;</msg>
+<status status="PASS" endtime="20170720 16:49:33.578" starttime="20170720 16:49:32.075"></status>
+</kw>
+<kw name="There Should Be Face In Image" library="lhg-robot-libs">
+<arguments>
+<arg>After.png</arg>
+</arguments>
+<msg timestamp="20170720 16:49:33.796" level="FAIL">No face in the image!</msg>
+<status status="FAIL" endtime="20170720 16:49:33.797" starttime="20170720 16:49:33.579"></status>
+</kw>
+<status status="FAIL" endtime="20170720 16:49:33.797" critical="yes" starttime="20170720 16:49:03.049">No face in the image!</status>
+</test>
+<kw type="teardown" name="Close Connection and Browser" library="lhg-robot-config">
+<kw name="Close Browser" library="Selenium2Library">
+<doc>Closes the current browser.</doc>
+<status status="PASS" endtime="20170720 16:49:33.857" starttime="20170720 16:49:33.799"></status>
+</kw>
+<kw name="Close All Connections" library="SSHLibrary">
+<doc>Closes all open connections.</doc>
+<status status="PASS" endtime="20170720 16:49:33.921" starttime="20170720 16:49:33.857"></status>
+</kw>
+<status status="PASS" endtime="20170720 16:49:33.921" starttime="20170720 16:49:33.799"></status>
+</kw>
+<status status="FAIL" endtime="20170720 16:49:33.921" starttime="20170720 16:48:56.818"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="1">Critical Tests</stat>
+<stat fail="1" pass="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="Eme-Clearkey-Test" pass="1">Eme-Clearkey-Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
