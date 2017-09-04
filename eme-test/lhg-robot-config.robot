@@ -13,8 +13,7 @@ ${TARGET}         192.168.29.107
 ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
-${CK_TESTPAGE}    http://people.linaro.org/~naresh.kamboju/chrome/eme_player.html
-${CK_TEST_VIDEO_URL}    http://people.linaro.org/~arthur.she/chrome/Chrome_44-enc_av.webm
+${CK_TESTPAGE}    http://people.linaro.org/~peter.griffin/chrome/eme_player.html
 
 *** Keywords ***
 Open SSH Connection And Login
@@ -24,6 +23,11 @@ Open SSH Connection And Login
 Run Chromedriver
     ${written}=    write    su
     ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &
+    Sleep    5s
+
+Run Cdmiservice
+    ${written}=    write    su
+    ${stdout}=    write    cdmiservice &
     Sleep    5s
 
 Prepare Browser

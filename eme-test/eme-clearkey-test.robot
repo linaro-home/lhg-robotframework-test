@@ -7,9 +7,11 @@ Resource          lhg-robot-config.robot
 Start-Chromedriver
     Run Chromedriver
 
+Start-cdmiservice
+    Run Cdmiservice
+
 Run-EME-ClearKey-test
     Open Browser To Test Page
-    Input Video URL    ${CK_TEST_VIDEO_URL}
     Select Key System    External Clearkey
     Sleep    5s
     Scroll Page Down To Bottom
