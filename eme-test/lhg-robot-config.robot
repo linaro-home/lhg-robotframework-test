@@ -3,17 +3,19 @@ Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language.
-Library           Selenium2Library    timeout=90s    run_on_failure=Nothing
+Library           ExtendedSelenium2Library    timeout=90s    run_on_failure=Nothing
 Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
 
 *** Variables ***
-${TARGET}         192.168.29.107
+${TARGET}         192.168.29.144
 ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
 ${CK_TESTPAGE}    http://people.linaro.org/~peter.griffin/chrome/eme_player.html
+${PR_TESTPAGE}    http://people.linaro.org/~peter.griffin/dash.js.mainline/samples/dash-if-reference-player/index.html
+${PR_VIDEO_URL}    http://wams.edgesuite.net/media/SintelTrailer_Smooth_from_WAME_CENC/CENC/sintel_trailer-1080p.ism/manifest(format=mpd-time-csf)
 
 *** Keywords ***
 Open SSH Connection And Login
@@ -23,12 +25,20 @@ Open SSH Connection And Login
 Run Chromedriver
     ${written}=    write    su
     ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &
-    Sleep    5s
+    ${output}    Read    delay=2s
+    Sleep    3s
 
-Run Cdmiservice
-    ${written}=    write    su
+Run Cdmiservice For EME Clearkey Test
     ${stdout}=    write    cdmiservice &
-    Sleep    5s
+    ${output}=    Read    delay=1s
+    Sleep    4s
+
+Run Cdmiservice For EME Playready Test
+    ${stdout}=    write    cd /usr/share/playready
+    ${output}=    Read    delay=1s
+    Should Not Contain    ${output}    No such file or directory
+    ${stdout}    write    cdmiservice &
+    Sleep    3s
 
 Prepare Browser
     ${capabilities}=    Create Dictionary
@@ -42,9 +52,9 @@ Prepare Browser
     Maximize Browser Window
 
 Open Browser To Test Page
+    [Arguments]    ${testpage}
     Prepare Browser
-    Go To    ${CK_TESTPAGE}
-    Wait Until Element Is Visible    id=keySystemList
+    Go To    ${testpage}
 
 Input Video URL
     [Arguments]    ${video_url}
@@ -58,7 +68,8 @@ Scroll Page Down To Bottom
     Execute Javascript    window.scrollTo(0,document.body.scrollHeight);
 
 Play Video
-    Click Button    Play
+    [Arguments]    ${Play_Btn}
+    Click Button    ${Play_Btn}
 
 Close Connection and Browser
     Close Browser
