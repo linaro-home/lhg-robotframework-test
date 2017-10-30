@@ -7,6 +7,7 @@ Library           ExtendedSelenium2Library    timeout=90s    run_on_failure=Noth
 Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
+Library           DateTime
 
 *** Variables ***
 ${TARGET}         192.168.29.143
@@ -48,7 +49,9 @@ Run wget test page
     Should Contain    ${output}    eme_player.html
 
 Upload log file
-    Execute Command     scp /home/linaro/chromedriver.log arthur.she@people.linaro.org:~/tmp/hikey.log
+    ${date}=    Get Current Date    result_format=%Y-%m-%d-%H-%M
+    ${log-file}=    Catenate    SEPARATOR=-    webdriver.log    ${date}
+    Execute Command    scp /home/linaro/chromedriver.log arthur.she@people.linaro.org:~/tmp/hikey.log/${log-file}
 
 Prepare Browser
     ${capabilities}=    Create Dictionary
