@@ -22,3 +22,6 @@ Run-EME-ClearKey-test
     Sleep    10s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png
+
+Upload-log-file
+    Upload log file

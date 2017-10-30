@@ -47,6 +47,9 @@ Run wget test page
     ${output}=    Read    delay=1s
     Should Contain    ${output}    eme_player.html
 
+Upload log file
+    Execute Command     scp /home/linaro/chromedriver.log arthur.she@people.linaro.org:~/tmp/hikey.log
+
 Prepare Browser
     ${capabilities}=    Create Dictionary
     ${extension_list}=    Create List
