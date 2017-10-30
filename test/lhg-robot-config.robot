@@ -52,6 +52,7 @@ Upload log file
     ${date}=    Get Current Date    result_format=%Y-%m-%d-%H-%M
     ${log-file}=    Catenate    SEPARATOR=-    webdriver.log    ${date}
     Execute Command    scp /home/linaro/chromedriver.log arthur.she@people.linaro.org:~/tmp/hikey.log/${log-file}
+    Sleep   10s
 
 Prepare Browser
     ${capabilities}=    Create Dictionary
