@@ -3,7 +3,7 @@ Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language.
-Library           ExtendedSelenium2Library    timeout=90s    run_on_failure=Nothing
+Library           Selenium2Library    timeout=90s    run_on_failure=Nothing
 Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
@@ -57,7 +57,7 @@ Upload log file
 Prepare Browser
     ${capabilities}=    Create Dictionary
     ${extension_list}=    Create List
-    ${args_list}=    Create List    --no-sandbox    --register-pepper-plugins=/usr/lib64/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm    --in-process-gpu    --enable-logging=/home/root/chromium_browser.log    --v=0
+    ${args_list}=    Create List    --no-sandbox    --register-pepper-plugins=/usr/lib64/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm    --in-process-gpu    --enable-logging=/home/linaro/chromium_browser.log    --v=0
     Set To Dictionary    ${capabilities}    extensions    ${extension_list}
     Set To Dictionary    ${capabilities}    args    ${args_list}
     ${desired_capabilities}=    Create Dictionary    chromeOptions=${capabilities}
