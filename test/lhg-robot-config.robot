@@ -25,7 +25,7 @@ Open SSH Connection And Login
 
 Run Chromedriver
     ${written}=    write    su
-    ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &
+    ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/tmp/chromedriver.log &
     ${output}    Read    delay=2s
     Sleep    3s
 
