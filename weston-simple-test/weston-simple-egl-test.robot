@@ -12,6 +12,7 @@ Run-weston-simple-test-1
     Sleep       18s
     Terminate The Program
     ${output}       Read
+    Log To Console    ${output}
     Should Contain      ${output}       frames in 5 seconds
 
 Run-weston-simple-test-2
@@ -20,4 +21,5 @@ Run-weston-simple-test-2
     Sleep       18s
     Terminate The Program
     ${output}       Read
+    Log To Console    ${output}
     Should Contain      ${output}       frames in 5 seconds
