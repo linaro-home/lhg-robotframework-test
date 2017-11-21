@@ -4,9 +4,6 @@ Suite Teardown    Close Connection and Browser
 Resource          lhg-robot-config.robot
 
 *** Test Cases ***
-Start-Chromedriver
-    Run Chromedriver
-
 Start-cdmiservice
     Run Cdmiservice For EME Clearkey Test
 
@@ -23,5 +20,3 @@ Run-EME-ClearKey-test
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png
 
-Upload-log-file
-    Upload log file

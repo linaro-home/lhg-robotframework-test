@@ -14,6 +14,7 @@ ${TARGET}         192.168.29.143
 ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
+${BROWSER_TESTPAGE}    http://www.google.com
 ${CK_TESTPAGE}    http://people.linaro.org/~peter.griffin/chrome/eme_player.html
 ${PR_TESTPAGE}    http://people.linaro.org/~peter.griffin/dash.js.mainline/samples/dash-if-reference-player/index.html
 ${PR_VIDEO_URL}    http://wams.edgesuite.net/media/SintelTrailer_Smooth_from_WAME_CENC/CENC/sintel_trailer-1080p.ism/manifest(format=mpd-time-csf)
@@ -22,9 +23,9 @@ ${PR_VIDEO_URL}    http://wams.edgesuite.net/media/SintelTrailer_Smooth_from_WAM
 Open SSH Connection And Login
     Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
+    ${written}=    write    su
 
 Run Chromedriver
-    ${written}=    write    su
     ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/tmp/chromedriver.log &
     ${output}    Read    delay=2s
     Sleep    3s
