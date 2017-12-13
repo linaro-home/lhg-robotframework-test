@@ -23,4 +23,4 @@ def recognize_characters_from_the_image(image):
     if (len(text) == 0):
         raise AssertionError("There is no character in the image!")
 
-    return text
+    return "\n" + text
