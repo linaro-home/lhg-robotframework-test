@@ -23,6 +23,6 @@ Run-EME-Playready-test
     #Click Element          xpath=//a[text()='Microsoft #1']
     #Sleep       2s
     Play Video    Load
-    Sleep    40s
+    Sleep    50s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png
