@@ -3,47 +3,62 @@ Documentation     A resource file with reusable keywords and variables.
 ...
 ...               The system specific keywords created here form our own
 ...               domain specific language.
-Library           SeleniumLibrary    timeout=90s    run_on_failure=Nothing
+Library           Selenium2Library    timeout=90s    run_on_failure=Nothing
 Library           SSHLibrary    timeout=30s    prompt=hikey:~$
 Library           Collections
 Library           lhg-robot-libs.py
+Library           DateTime
 
 *** Variables ***
-${TARGET}         192.168.29.144
+${TARGET}         192.168.29.143
 ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
+${BROWSER_TESTPAGE}    http://www.google.com
 ${CK_TESTPAGE}    http://people.linaro.org/~peter.griffin/chrome/eme_player.html
-${PR_TESTPAGE}    http://people.linaro.org/~peter.griffin/dash.js/samples/dash-if-reference-player/index.html
-${PR_VIDEO_URL}   http://profficialsite.origin.mediaservices.windows.net/c51358ea-9a5e-4322-8951-897d640fdfd7/tearsofsteel_4k.ism/manifest(format=mpd-time-csf)
+${PR_TESTPAGE}    http://people.linaro.org/~peter.griffin/dash.js.mainline/samples/dash-if-reference-player/index.html
+${PR_VIDEO_URL}    http://wams.edgesuite.net/media/SintelTrailer_Smooth_from_WAME_CENC/CENC/sintel_trailer-1080p.ism/manifest(format=mpd-time-csf)
 
 *** Keywords ***
 Open SSH Connection And Login
     Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
+    ${written}=    write    su
 
 Run Chromedriver
-    ${written}=    write    su
-    ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/home/linaro/chromedriver.log &
+    ${stdout}=    write    /usr/bin/chromium/chromedriver --verbose --whitelisted-ips --log-path=/tmp/chromedriver.log &
     ${output}    Read    delay=2s
-    Sleep    1s
+    Sleep    3s
 
 Run Cdmiservice For EME Clearkey Test
     ${stdout}=    write    cdmiservice &
     ${output}=    Read    delay=1s
-    Sleep    1s
+    Sleep    4s
 
 Run Cdmiservice For EME Playready Test
     ${stdout}=    write    cd /usr/share/playready
     ${output}=    Read    delay=1s
-    Should Not Contain    ${output}    No such file or directory
+    Should Contain    ${output}    ‘eme_player.html’ saved
     ${stdout}    write    cdmiservice &
-    Sleep    1s
+    Sleep    3s
+
+Run wget test page
+    write    rm -f *.html
+    ${stdout}=    write    wget ${CK_TESTPAGE}
+    Sleep    5s
+    ${output}=    Read    delay=1s
+    Should Contain    ${output}    eme_player.html
+
+Upload log file
+    ${date}=    Get Current Date    result_format=%Y-%m-%d-%H-%M
+    ${log-file}=    Catenate    SEPARATOR=-    webdriver.log    ${date}
+    Execute Command    scp /home/linaro/chromedriver.log arthur.she@people.linaro.org:~/tmp/hikey.log/${log-file}
+    Sleep   10s
 
 Prepare Browser
     ${capabilities}=    Create Dictionary
     ${extension_list}=    Create List
-    ${args_list}=    Create List    --no-sandbox    --register-pepper-plugins=/usr/lib64/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm    --in-process-gpu    --enable-logging=/home/root/chromium_browser.log    --v=0   --use-gl=egl   --ozone-platform=wayland   --composite-to-mailbox   --enable-low-end-device-mode   --user-data-dir=data_dir   --blink-platform-log-channels=Media
+    ${args_list}=    Create List    --no-sandbox    --register-pepper-plugins=/usr/lib64/chromium/libopencdmadapter.so;application/x-ppapi-open-cdm    --in-process-gpu    --enable-logging=/home/linaro/chromium_browser.log    --v=0
     Set To Dictionary    ${capabilities}    extensions    ${extension_list}
     Set To Dictionary    ${capabilities}    args    ${args_list}
     ${desired_capabilities}=    Create Dictionary    chromeOptions=${capabilities}

@@ -8,14 +8,12 @@ Start-Chromedriver
     Run Chromedriver
 
 Start-cdmiservice
-    Run Cdmiservice For EME Clearkey Test
+    Run Cdmiservice For EME Playready Test
 
-Run-EME-ClearKey-test
-    Open Browser To Test Page    ${CK_TESTPAGE}
-    Select Key System    External Clearkey
-    Sleep    5s
-    Scroll Page Down To Bottom
-    Play Video    Play
+Run-EME-Playready-test
+    Open Browser To Test Page    ${PR_TESTPAGE}
+    Input text    model=selectedItem.url    ${PR_VIDEO_URL}
+    Play Video    Load
     Sleep    10s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png

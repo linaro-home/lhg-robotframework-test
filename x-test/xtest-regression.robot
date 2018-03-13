@@ -6,6 +6,6 @@ Suite Teardown    Close All Connections
 Resource          resource-xtest.robot
 
 *** Test Cases ***
-Execute xtest regression test
+Execute-xtest-regression-test
     [Documentation]    Execute "xtest -t regression"
     Run Regression Test

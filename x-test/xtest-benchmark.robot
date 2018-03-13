@@ -6,6 +6,6 @@ Suite Teardown    Close All Connections
 Resource          resource-xtest.robot
 
 *** Test Cases ***
-Execute xtest benchmark test
+Execute-xtest-benchmark-test
     [Documentation]    Execute "xtest -t benchmark"
     Run Benchmark Test
