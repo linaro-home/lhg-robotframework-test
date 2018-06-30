@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation     This test executing "weston-simple-test" on a remote machine
+Documentation     This test executing "weston-simple-egl" on a remote machine
 ...               and getting the test result.
 Suite Setup       Open Connection And Log In
 Suite Teardown    Close All Connections
