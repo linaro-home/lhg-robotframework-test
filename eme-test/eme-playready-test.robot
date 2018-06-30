@@ -12,17 +12,14 @@ Start-cdmiservice
 
 Run-EME-Playready-test
     Open Browser To Test Page    ${PR_TESTPAGE}
-    #Input text    xpath=//input[@ng-model='selectedItem.url']    ${PR_VIDEO_URL}
     Click Button        xpath=//button[@data-toggle='dropdown']
     Sleep       5s
-    #Wait Until Element Is Visible   xpath=//a[text()='Microsoft Test Content']
     Mouse Over          xpath=//a[text()='Microsoft Test Content']
-    #Sleep       5s
     Wait Until Element Is Visible   xpath=//a[text()='Microsoft AZURE MEDIA SERVICES ON DEMAND H264 AAC 4K CENC PLAYREADY 2.0']
     Click Element          xpath=//a[text()='Microsoft AZURE MEDIA SERVICES ON DEMAND H264 AAC 4K CENC PLAYREADY 2.0']
-    #Click Element          xpath=//a[text()='Microsoft #1']
-    #Sleep       2s
+    Click Element          id=enableVideoStartTime
+    Input Text          id=videoStartTime       28
     Play Video    Load
-    Sleep    50s
+    Wait Until Element Contains     id=videoStatus      Playing
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png

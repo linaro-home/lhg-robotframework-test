@@ -14,7 +14,7 @@ ${USERNAME}       linaro
 ${PASSWORD}       ${EMPTY}
 ${TARGET_CD}      http://${TARGET}:9515
 ${CK_TESTPAGE}    http://people.linaro.org/~peter.griffin/chrome/eme_player.html
-${PR_TESTPAGE}    http://people.linaro.org/~peter.griffin/dash.js/samples/dash-if-reference-player/index.html
+${PR_TESTPAGE}    http://people.linaro.org/~arthur.she/playready_test/dash.js/samples/dash-if-reference-player/index.html
 ${PR_VIDEO_URL}   http://profficialsite.origin.mediaservices.windows.net/c51358ea-9a5e-4322-8951-897d640fdfd7/tearsofsteel_4k.ism/manifest(format=mpd-time-csf)
 
 *** Keywords ***
