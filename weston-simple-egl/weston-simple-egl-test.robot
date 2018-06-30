@@ -7,7 +7,7 @@ Resource          resource.robot
 
 *** Test Cases ***
 Run-weston-simple-test-1
-    [Documentation]    Run test "weston-simple-test -f"
+    [Documentation]    Run test "weston-simple-egl -f"
     Run Test-1
     Sleep       18s
     Terminate The Program
@@ -16,7 +16,7 @@ Run-weston-simple-test-1
     Should Contain      ${output}       frames in 5 seconds
 
 Run-weston-simple-test-2
-    [Documentation]    Run test "weston-simple-test -f -b"
+    [Documentation]    Run test "weston-simple-egl -f -b"
     Run Test-2
     Sleep       18s
     Terminate The Program
