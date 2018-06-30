@@ -4,6 +4,9 @@ Suite Teardown    Close Connection and Browser
 Resource          lhg-robot-config.robot
 
 *** Test Cases ***
+Check-rpcbind
+    Check rpcbind
+
 Start-Chromedriver
     Run Chromedriver
 
