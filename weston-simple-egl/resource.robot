@@ -14,7 +14,7 @@ ${TEST_PROGRAM}    /usr/bin/weston-simple-egl
 Open Connection And Log In
     Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
-    Set Client Configuration    timeout=${TIMEOUT}    prompt=hikey:~$
+    Set Client Configuration    timeout=${TIMEOUT}
     Write    su
 
 Run Test-1

@@ -16,7 +16,7 @@ ${VIDEO_FILE_URL}    http://people.linaro.org/~arthur.she/test-materials
 Open Connection And Log In
     Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
-    Set Client Configuration    timeout=${TIMEOUT}    prompt=hikey:~$
+    Set Client Configuration    timeout=${TIMEOUT}
     Write    su
 
 Download Video File

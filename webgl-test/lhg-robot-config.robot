@@ -4,7 +4,7 @@ Documentation     A resource file with reusable keywords and variables.
 ...               The system specific keywords created here form our own
 ...               domain specific language.
 Library           SeleniumLibrary    timeout=90s    run_on_failure=Nothing
-Library           SSHLibrary    timeout=30s    prompt=hikey:~$
+Library           SSHLibrary    timeout=30s
 Library           Collections
 Library           lhg-robot-libs.py
 

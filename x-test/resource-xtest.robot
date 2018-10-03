@@ -14,7 +14,7 @@ ${TIMEOUT}        4m
 Open Connection And Log In
     Open Connection    ${TARGET}
     Login    ${USERNAME}    ${PASSWORD}
-    Set Client Configuration    timeout=${TIMEOUT}    prompt=root@hikey:~#
+    Set Client Configuration    timeout=${TIMEOUT}
 
 Run Tee Supplicant
     Start Command    /usr/bin/tee-supplicant
@@ -24,10 +24,12 @@ Terminate Tee Supplicant
 
 Run Regression Test
     write    xtest -t regression
-    ${result}    Read Until Prompt
-    Should Contain    ${result}    TEE test application done!
+    #${result}    Read Until Prompt
+    ${result}    Read Until     TEE test application done
+    #Should Contain    ${result}    TEE test application done!
 
 Run Benchmark Test
     write    xtest -t benchmark
-    ${result}    Read Until Prompt
-    Should Contain    ${result}    TEE test application done!
+    #${result}    Read Until Prompt
+    ${result}    Read Until     TEE test application done
+    #Should Contain    ${result}    TEE test application done!
