@@ -19,6 +19,8 @@ Run-EME-ClearKey-test
     Sleep    5s
     Scroll Page Down To Bottom
     Play Video    Play
+    Sleep    3s
+    Click Button    Play
     Sleep    10s
     Capture Page Screenshot    filename=After.png
     There should be face in image    After.png
