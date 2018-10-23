@@ -14,5 +14,6 @@ Run gst-wayland-test
     [Documentation]    Play ${VIDEO_FILE} with ${TEST_PROGRAM} and check the output message
     ${output}    Execute Command    ${TEST_PROGRAM} playbin uri=file:///home/linaro/${VIDEO_FILE} video-sink=waylandsink audio-sink=fakesink 2>/dev/null
     Log To Console      ${output}
+    Should Not Contain    ${output}    A lot of buffers are being dropped
     Should Contain    ${output}    Execution ended after 0:02:00
 
