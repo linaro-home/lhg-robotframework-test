@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     This test executing "weston-simple-egl" on a remote machine
 ...               and getting the test result.
-Suite Setup       Open Connection And Log In
+Suite Setup       Open SSH Connection And Log In    ${TARGET}   ${USER}     ${PASSWORD}
 Suite Teardown    Close All Connections
 Resource          resource.robot
 

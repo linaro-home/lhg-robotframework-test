@@ -1,7 +1,7 @@
 *** Settings ***
-Suite Setup       Open SSH Connection And Login
+Suite Setup       Open SSH Connection And Login      ${TARGET}   ${USER}     ${PASSWORD}
 Suite Teardown    Close Connection and Browser
-Resource          lhg-robot-config.robot
+Resource          resource.robot
 
 *** Test Cases ***
 Check-rpcbind
@@ -14,7 +14,7 @@ Start-cdmiservice
     Run Cdmiservice For EME Playready Test
 
 Run-EME-Playready-test
-    Open Browser To Test Page    ${PR_TESTPAGE}
+    Open Browser To Test Page    ${TARGET_CD}       ${PR_TESTPAGE}
     Click Button        xpath=//button[@data-toggle='dropdown']
     Sleep       5s
     Mouse Over          xpath=//a[text()='Microsoft Test Content']

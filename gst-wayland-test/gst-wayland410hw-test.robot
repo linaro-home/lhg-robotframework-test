@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation     This test plays a video with "gst-launch-1.0" by using venus engine for hw decoding
 ...               on a remote machine and getting the test result.
-Suite Setup       Open Connection And Log In
+Suite Setup       Open SSH Connection And Log In    ${TARGET}   ${USER}     ${PASSWORD}
 Suite Teardown    Close All Connections
 Resource          resource.robot
 

@@ -1,7 +1,7 @@
 *** Settings ***
-Suite Setup       Open SSH Connection And Login
+Suite Setup       Open SSH Connection And Login      ${TARGET}   ${USER}     ${PASSWORD}
 Suite Teardown    Close Connection and Browser
-Resource          lhg-robot-config.robot
+Resource          resource.robot
 
 *** Test Cases ***
 Check-rpcbind
@@ -14,7 +14,7 @@ Start-cdmiservice
     Run Cdmiservice For EME Clearkey Test
 
 Run-EME-ClearKey-test
-    Open Browser To Test Page    ${CK_TESTPAGE}
+    Open Browser To Test Page    ${TARGET_CD}   ${CK_TESTPAGE}
     Select Key System    External Clearkey
     Sleep    5s
     Scroll Page Down To Bottom
