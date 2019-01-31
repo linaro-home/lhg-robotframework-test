@@ -23,13 +23,11 @@ Terminate Tee Supplicant
     Start Command    pkill tee-supplicant
 
 Run Regression Test
-    write    xtest -t regression
-    #${result}    Read Until Prompt
-    ${result}    Read Until     TEE test application done
-    #Should Contain    ${result}    TEE test application done!
+    ${stdout}      ${rc}=      Execute Command     xtest -t regression     return_rc=True
+    Log To Console      ${stdout}
+    Should Be Equal As Integers	    ${rc}	    0
 
 Run Benchmark Test
-    write    xtest -t benchmark
-    #${result}    Read Until Prompt
-    ${result}    Read Until     TEE test application done
-    #Should Contain    ${result}    TEE test application done!
+    ${stdout}      ${rc}=      Execute Command     xtest -t benchmark      return_rc=True
+    Log To Console      ${stdout}
+    Should Be Equal As Integers	    ${rc}	    0
